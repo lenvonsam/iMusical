@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>最近演出</ion-title>
+    <ion-buttons end>
+      <button ion-button color="royal" style="font-size:1.7rem;">
+        <i class="fa fa-map-marker mr-5"></i>
+        北京
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content style="background: #f7f7f7;">
+  <div padding>
+    <ion-segment [(ngModel)]="showSection" color="dark">
+     <ion-segment-button value="showing">
+       正在上演
+     </ion-segment-button>
+     <ion-segment-button value="willShow">
+       即将上演
+     </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="showSection">
+    <ion-list *ngSwitchCase="'showing'">
+      <ion-row>
+        <ion-col width-50>
+         <ion-card class="mr-6">
+          <div class="star-layer">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </div>
+           <img src="assets/img/mainslide.jpg">
+           <ion-card-title class="pl-5">xxx</ion-card-title>
+          <p class="show-content">
+            <ion-icon name="heart" class="mr-5" color="danger"></ion-icon>76
+            <span class="pull-right pr-5 pl-5">演出时间7.25-8.30</span>
+            </p>
+         </ion-card>
+        </ion-col>
+        <ion-col width-50>
+          <ion-card class="ml-6">
+          <div class="star-layer">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </div>
+           <img src="assets/img/mainslide.jpg">
+           <ion-card-title class="pl-5">xxx</ion-card-title>
+            <p class="show-content">
+            <ion-icon name="heart" class="mr-5" color="danger"></ion-icon>76
+            <span class="pull-right pr-5 pl-5">演出时间7.25-8.30</span>
+            </p>
+         </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <ion-list *ngSwitchCase="'willShow'">
+      <ion-row>
+        <ion-col width-50>
+         789
+        </ion-col>
+        <ion-col width-50>
+          0123
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </div>
+</ion-content>

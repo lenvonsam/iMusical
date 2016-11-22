@@ -1,0 +1,26 @@
+page-lastShow {
+  ion-col {
+    padding:0;
+  }
+
+  ion-col ion-card {
+    position: relative;
+    margin:0;
+  }
+
+  .star-layer {
+    position: absolute;
+    left:5px;
+    top:5px;
+  }
+
+  .star-layer ion-icon[name="star"],.star-layer ion-icon[name="star-outline"] {
+    color:yellow;
+  }
+
+  .show-content {
+    font-size: 10px;
+    line-height: 10px;
+    padding-left:5px;
+  }
+}
