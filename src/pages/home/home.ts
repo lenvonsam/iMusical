@@ -2,18 +2,21 @@ import { Component,ViewChild } from '@angular/core';
 
 import { NavController,App,Slides,Content,Events } from 'ionic-angular';
 
-import {Http,Jsonp,URLSearchParams} from '@angular/http';
+import {Http,Jsonp,URLSearchParams,Headers,RequestOptions} from '@angular/http';
 
 import {ConsultDetailPage} from './consultDetail';
 
 import {LastShowPage} from './lastShow';
+
+import {MusicalHttpService} from '../../services/http-service'
 
 import 'rxjs/add/operator/toPromise';
 
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers:[MusicalHttpService]
 })
 export class HomePage {
   // @ViewChild('mySliders') slider: Slides;
@@ -25,7 +28,16 @@ export class HomePage {
   // isclick:boolean;
   // navPosition:String;
   @ViewChild(Content) content:Content;
-  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events) {
+  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events,private hs: MusicalHttpService) {
+   let result = hs.getNewsTopPicsData()
+   alert(JSON.stringify(result));
+    // let headers = new Headers({ 'Content-Type': 'application/json' });
+    // let options = new RequestOptions({ headers: headers });
+    // this.http.post('http://www.imusical.cn:8080/iMusical/Article/selectTopArticle.form',{},options).toPromise().then((res)=>{
+    //   alert(JSON.stringify(res));
+    // }).catch((err)=>{
+    //   alert('error');
+    // })
     // this._options={
     //   pager:true
     // };
