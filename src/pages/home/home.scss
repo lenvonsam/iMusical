@@ -1,26 +1,27 @@
 page-home {
-  .xx{
-    transform: none !important;
-  }
-  ion-navbar {
-    position: fixed;
-    .toolbar-background {
-      background:  transparent !important;
-      border-color: transparent !important;
-    }
-  }
+  // .xx{
+  //   transform: none !important;
+  // }
+  // ion-navbar {
+  //   position: fixed;
+  //   .toolbar-background {
+  //     background:  transparent !important;
+  //     border-color: transparent !important;
+  //   }
+  // }
   .banner {
     height: 250px;
     padding:0;
     overflow: hidden;
   }
 
-  .swiper-slide img {
+  .banner .swiper-slide img {
     width: 100%;
     height: 100%;
   }
 
   .img-scroll {
+    background: white;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 

@@ -17,18 +17,21 @@ import 'rxjs/add/operator/toPromise';
 })
 export class HomePage {
   // @ViewChild('mySliders') slider: Slides;
-  // _options:Object;
+  _options:Object;
+  _scrollOptions:Object;
   // sliderHeight:any;
   // sliderWidth:any;
   // navBackground:any;
   // navOpacity:any;
   // isclick:boolean;
   // navPosition:String;
-  @ViewChild(Content) content:Content;
   constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events) {
-    // this._options={
-    //   pager:true
-    // };
+    this._options={
+      pager:true
+    };
+    this._scrollOptions={
+      slidesPerView:3
+    };
     // console.log(window.innerWidth);
     // this.sliderWidth = window.innerWidth;
     // this.sliderHeight='scale(1,1)';
@@ -38,48 +41,14 @@ export class HomePage {
     // this.navPosition = 'fixed';
     // this.isclick=false;
     this.app.setScrollDisabled(true);
-    console.log(this.content);
   }
-
-
-  // getColor() {
-  //   if(this.isclick) {
-  //     return "white";
-  //   } else {
-  //     return "blue";
-  //   }
-  // }
-
-  // doRefresh(refresher) {
-  //   console.log('Begin async operation', refresher);
-
-  //   setTimeout(() => {
-  //     console.log('Async operation has ended');
-  //     this.sliderHeight='250px';
-  //     this.sliderWidth = '100%';
-  //     this.navBackground = 'transparent';
-  //     this.navOpacity=1;
-  //     this.navPosition = 'fixed';
-  //     console.log('refreshing');
-  //     console.log(refresher.progress);
-  //     refresher.complete();
-  //   }, 2000);
-  // }
-
-  // doPull(refresher) {
-  //   console.log('do pull',refresher);
-  //   console.log('startY:>>'+refresher.startY);
-  //   console.log('currentY:>>'+refresher.currentY);
-  //   console.log('diffY:<<'+(refresher.currentY-refresher.startY));
-  //   let diffY = refresher.currentY-refresher.startY;
-  //   console.log('state:>>'+refresher.state);
-  //   this.sliderHeight=(250+diffY)+'px';
-  //   this.sliderWidth = (window.innerWidth/250)*(250+diffY)+'px';
-  // }
-
-  // doStart(refresher) {
-  //   console.log('do start',refresher);
-  // }
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 
   // tapEvent() {
   //   alert('tap me');
@@ -159,13 +128,13 @@ export class HomePage {
 // console.log('They see me scrolling...');
 //   }
 
-//   consultDetail() {
+  consultDetail() {
 
-//     this.navCtrl.push(ConsultDetailPage);
-//   }
+    this.navCtrl.push(ConsultDetailPage);
+  }
 
-//   lastShow() {
-//     this.navCtrl.push(LastShowPage);
-//   }
+  lastShow(e) {
+    this.navCtrl.push(LastShowPage);
+  }
 
 }

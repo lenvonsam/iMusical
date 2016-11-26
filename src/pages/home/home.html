@@ -1,4 +1,108 @@
-<ion-content class="xx">
-  xxx
-</ion-content>
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>首页</ion-title>
+    <ion-buttons end>
+      <button ion-button color="royal">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
+<ion-content class="no-scroll bg" fullscreen="true">
+ <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="200">
+    <ion-refresher-content refreshingSpinner="circles" >
+    </ion-refresher-content>
+  </ion-refresher>
+    <div class="banner">
+      <ion-slides [options]="_options">
+        <ion-slide>
+           <img src="assets/img/mainslide.jpg">
+
+        </ion-slide>
+       <ion-slide>
+          <img src="assets/img/mainslide1.jpg">
+        </ion-slide>
+      </ion-slides>
+    </div>
+  <ion-list no-lines>
+     <ion-list-header no-lines detail-push>
+      最新上演
+      <span item-right (tap)="lastShow($event)">
+        所有
+      </span>
+    </ion-list-header>
+    <div class="img-scroll">
+    <ion-slides [options]="_scrollOptions">
+      <ion-slide class="mr-5">
+          <img src="assets/img/mainslide1.jpg">
+          <p>xxx</p>
+        </ion-slide>
+        <ion-slide class="mr-5">
+          <img src="assets/img/mainslide1.jpg">
+          <p>xxx</p>
+        </ion-slide>
+        <ion-slide class="mr-5">
+          <img src="assets/img/mainslide1.jpg">
+          <p>xxx</p>
+        </ion-slide>
+        <ion-slide class="mr-5">
+          <img src="assets/img/mainslide1.jpg">
+          <p>xxx</p>
+        </ion-slide>
+    </ion-slides>
+    </div>
+
+    <ion-item-divider>
+      Imusical 资讯
+    </ion-item-divider>
+    <ion-card style="position: relative;margin: 0;padding: 10px 5px; width: 100%;border-radius: 0px;">
+      <img src="assets/img/mainslide1.jpg" style="border-radius: 2px">
+      <div style="position: absolute;top:18px;left:13px;background-color: gray;padding:5px 5px;color:white; opacity: 0.6;font-size:10px;border-radius: 4px;font-weight: bold;">
+          资讯
+      </div>
+      <ion-card-content>
+        <h3>xxxx</h3>
+        <p>111123</p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+      <button primary clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>12 Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button primary clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>4 Comments</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        11h ago
+      </ion-note>
+    </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+    <ion-item>
+      <h1>hello</h1>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
