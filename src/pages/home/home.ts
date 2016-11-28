@@ -2,30 +2,47 @@ import { Component,ViewChild } from '@angular/core';
 
 import { NavController,App,Slides,Content,Events } from 'ionic-angular';
 
-import {Http,Jsonp,URLSearchParams} from '@angular/http';
+import {Http,Jsonp,URLSearchParams,Headers,RequestOptions} from '@angular/http';
 
 import {ConsultDetailPage} from './consultDetail';
 
 import {LastShowPage} from './lastShow';
+
+import {MusicalHttpService} from '../../services/http-service'
+
+import {NewsTopSlide} from '../../models/NewTopSlide';
 
 import 'rxjs/add/operator/toPromise';
 
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers:[MusicalHttpService]
 })
 export class HomePage {
   // @ViewChild('mySliders') slider: Slides;
   _options:Object;
   _scrollOptions:Object;
+  topSlides:any[] = [];
   // sliderHeight:any;
   // sliderWidth:any;
   // navBackground:any;
   // navOpacity:any;
   // isclick:boolean;
   // navPosition:String;
-  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events) {
+  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events,private musicalHttp:MusicalHttpService) {
+    let me = this;
+
+    this.musicalHttp.getNewsTopPicsData().then((res)=>{
+      alert('xxx>'+JSON.stringify(res));
+      me.topSlides=res;
+      console.log(me.topSlides.length);
+      console.log(me.topSlides);
+      console.log(me.topSlides[0].featurePic);
+    },(err)=>{
+      alert('error');
+    });
     this._options={
       pager:true
     };
@@ -68,7 +85,7 @@ export class HomePage {
   // }
 
   ngOnInit() {
-
+    alert('init');
     // let actionUrl = "https://samhp.leanapp.cn/manage/test";
     // this.http.get(actionUrl).toPromise().then((response)=>{
     //   let body = response.json();
@@ -86,11 +103,18 @@ export class HomePage {
     // });
    }
 
-  // ngAfterViewInit() {
-  //   // alert('view init');
+  // ngDoCheck() {
+  //   alert('do check');
+  // }
+
+  ngOnChanges() {
+    alert('changes');
+  }
+  ngAfterViewInit() {
+     alert('view init');
   //   // this.content = this.app.getComponent('myContent');
   //   console.log(this.content);
-  //   this.content.addScrollListener((event)=>{
+    // this.content.addScrollListener((event)=>{
   //    let scrollHeight = event.target.scrollTop;
   //   if(scrollHeight>0 && scrollHeight<248) {
   //     this.navOpacity = scrollHeight/248;
@@ -126,7 +150,7 @@ export class HomePage {
 //       this.navOpacity=1;
 //     }
 // console.log('They see me scrolling...');
-//   }
+  }
 
   consultDetail() {
 

@@ -8,6 +8,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { HttpModule,JsonpModule } from '@angular/http';
 import { ConsultDetailPage } from '../pages/home/consultDetail';
 import { LastShowPage } from '../pages/home/lastShow';
+// import { MusicalHttpService } from '../services/http-service';
 
 @NgModule({
   declarations: [
