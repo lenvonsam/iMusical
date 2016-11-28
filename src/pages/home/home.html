@@ -19,7 +19,7 @@
       <p>{{s.title}}</p>
     </div> -->
        <ion-slides [options]="_options">
-        <ion-slide template="ngFor let item of topSlides; let i = index; trackBy: trackByFn">
+        <ion-slide template="ngFor let item of topSlides; let i = index;">
         <p>{{item.featurePic}}</p>
         <img src="{{item.featurePic}}">
 

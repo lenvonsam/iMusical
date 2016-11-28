@@ -8,7 +8,7 @@ import {ConsultDetailPage} from './consultDetail';
 
 import {LastShowPage} from './lastShow';
 
-import {MusicalHttpService} from '../../services/http-service'
+import {MusicalHttpService} from '../../services/http-service';
 
 import {NewsTopSlide} from '../../models/NewTopSlide';
 
@@ -107,9 +107,6 @@ export class HomePage {
   //   alert('do check');
   // }
 
-  ngOnChanges() {
-    alert('changes');
-  }
   ngAfterViewInit() {
      alert('view init');
   //   // this.content = this.app.getComponent('myContent');
