@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 
-import { NavController} from 'ionic-angular';
+import { NavController,NavParams} from 'ionic-angular';
 
 @Component({
   selector: 'page-lastShow',
@@ -8,7 +8,10 @@ import { NavController} from 'ionic-angular';
 })
 
 export class LastShowPage {
+  detailObj:Object;
   showSection = "showing";
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,public navParams:NavParams) {
+    console.log(navParams.data);
+    this.detailObj=this.navParams.data;
   }
 }

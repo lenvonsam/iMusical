@@ -14,41 +14,60 @@ import {NewsTopSlide} from '../../models/NewTopSlide';
 
 import 'rxjs/add/operator/toPromise';
 
+import {ArticleType,LoadingHelper} from '../../app/globalMethod';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers:[MusicalHttpService]
+  providers:[MusicalHttpService,LoadingHelper]
 })
 export class HomePage {
   // @ViewChild('mySliders') slider: Slides;
   _options:Object;
   _scrollOptions:Object;
   topSlides:any[] = [];
+  listData:any[] =[];
   // sliderHeight:any;
   // sliderWidth:any;
   // navBackground:any;
   // navOpacity:any;
   // isclick:boolean;
   // navPosition:String;
-  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events,private musicalHttp:MusicalHttpService) {
+  currentPage:number = 0;
+  showPage:boolean = false;
+  artsType:ArticleType = ArticleType.all;
+  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events,private musicalHttp:MusicalHttpService,public load:LoadingHelper) {
+    this.load.show();
     let me = this;
+    let topDataPromise = this.musicalHttp.getNewsTopPicsData();
+    // .then((res)=>{
+    //   alert('xxx>'+JSON.stringify(res));
+    //   me.topSlides=res;
+    //   console.log(me.topSlides.length);
+    //   console.log(me.topSlides);
+    //   console.log(me.topSlides[0].featurePic);
+    // },(err)=>{
+    //   alert('error');
+    // });
 
-    this.musicalHttp.getNewsTopPicsData().then((res)=>{
-      alert('xxx>'+JSON.stringify(res));
-      me.topSlides=res;
-      console.log(me.topSlides.length);
-      console.log(me.topSlides);
-      console.log(me.topSlides[0].featurePic);
-    },(err)=>{
-      alert('error');
-    });
+    let listDataPromise = musicalHttp.getNewsListData(this.currentPage,this.artsType);
     this._options={
       pager:true
     };
     this._scrollOptions={
       slidesPerView:3
     };
+
+    Promise.all([topDataPromise,listDataPromise]).then((result)=>{
+      console.log(result);
+      me.topSlides=result[0];
+      me.listData=result[1];
+      me.showPage = true;
+      me.load.hide();
+    }).catch((err)=>{
+      alert('error');
+    });
     // console.log(window.innerWidth);
     // this.sliderWidth = window.innerWidth;
     // this.sliderHeight='scale(1,1)';
@@ -84,8 +103,21 @@ export class HomePage {
   //   }
   // }
 
+  tapNewsDetail(item) {
+    console.log(item);
+    let id = item.id;
+    console.log(id);
+    const me = this;
+    this.musicalHttp.getNewsDetailInfo(id).then((data)=>{
+      console.log(data);
+      item.webbody = data[0].body;
+      me.navCtrl.push(LastShowPage,item);
+    }).catch((err)=>{
+      alert('error');
+    });
+  }
+
   ngOnInit() {
-    alert('init');
     // let actionUrl = "https://samhp.leanapp.cn/manage/test";
     // this.http.get(actionUrl).toPromise().then((response)=>{
     //   let body = response.json();
@@ -108,7 +140,6 @@ export class HomePage {
   // }
 
   ngAfterViewInit() {
-     alert('view init');
   //   // this.content = this.app.getComponent('myContent');
   //   console.log(this.content);
     // this.content.addScrollListener((event)=>{
