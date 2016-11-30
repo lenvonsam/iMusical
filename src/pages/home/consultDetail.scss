@@ -1,0 +1,18 @@
+page-consult {
+  ion-navbar {
+    position: fixed;
+    .toolbar-background {
+      background:  transparent !important;
+      border-color: transparent !important;
+    }
+  }
+
+  ion-footer {
+    .footer-btn {
+      padding:0px 0px;
+      text-align: center;
+      line-height: 55px;
+      font-size: 18px;
+    }
+  }
+}

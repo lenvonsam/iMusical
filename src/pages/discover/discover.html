@@ -1,21 +1,20 @@
 <ion-header>
   <ion-navbar color="dark">
     <ion-title>
-      发现
+      活动
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-<div class="card-background-page">
-  <ion-card class="card-full">
-    <img src="assets/img/mainslide1.jpg"/>
-    <div class="card-title">São Paulo</div>
-    <div class="card-subtitle">41 Listings</div>
-  </ion-card>
-
-</div>
-<ion-item-divider detail-push>
+  <div class="card-background-page" template="ngFor let item of activityData" (tap)="activeTap(item)">
+    <ion-card class="card-full">
+      <img [src]="item.featurePic"/>
+    </ion-card>
+    <p style="padding-left:5px;">{{item.title}}</p>
+    <p style="padding-left:5px;">{{item.loc}}</p>
+  </div>
+<!-- <ion-item-divider detail-push>
   话题
   <span item-right>
     所有
@@ -68,5 +67,5 @@
     <div class="card-title">São Paulo</div>
     <div class="card-subtitle">41 Listings</div>
   </ion-card>
-</div>
+</div> -->
 </ion-content>

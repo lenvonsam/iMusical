@@ -44,6 +44,10 @@
   margin-right: 5px !important;
 }
 
+.mb-0 {
+  margin-bottom:0px !important;
+}
+
 .pl-5 {
   padding-left:5px !important;
 }
@@ -54,4 +58,9 @@
 
 .bg {
   background-color: #f7f7f7 !important;
+}
+
+.menu-select .popover-content {
+  width:auto !important;
+  border-radius:6px;
 }

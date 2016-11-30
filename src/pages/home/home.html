@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-navbar color="dark">
+  <ion-navbar color="dark" (tap)="tapDoubleToTop($event)">
     <ion-title>首页</ion-title>
     <ion-buttons end>
-      <button ion-button color="royal">
-        <i class="fa-icon-filter"></i>
+      <button ion-button color="royal" (click)="showFilter($event)">
+        <i class="fa fa-filter"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -22,7 +22,7 @@
       </ion-slides>
   </div>
   <ion-list no-lines *ngIf="showPage">
-    <ion-item template="ngFor let itm of listData">
+    <ion-item template="ngFor let itm of listData" (tap)="tapNewsDetail(itm)">
      <ion-avatar item-left >
         <img [src]="itm.featurePic" style="border-radius: 6px;max-width:80px !important;max-height:80px !important;height:60px;" />
       </ion-avatar>

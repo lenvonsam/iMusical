@@ -8,7 +8,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { HttpModule,JsonpModule } from '@angular/http';
 import { ConsultDetailPage } from '../pages/home/consultDetail';
 import { LastShowPage } from '../pages/home/lastShow';
-import { MusicalHttpService } from '../services/http-service';
+import {HomePagePop} from '../pages/home/homePopPage';
+import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
+// import { MusicalHttpService } from '../services/http-service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { MusicalHttpService } from '../services/http-service';
     HomePage,
     TabsPage,
     ConsultDetailPage,
-    LastShowPage
+    LastShowPage,
+    HomePagePop,
+    DiscoverDetailPage
   ],
   imports: [
     HttpModule,
@@ -39,8 +43,10 @@ import { MusicalHttpService } from '../services/http-service';
     HomePage,
     TabsPage,
     ConsultDetailPage,
-    LastShowPage
+    LastShowPage,
+    HomePagePop,
+   DiscoverDetailPage 
   ],
-  providers: [MusicalHttpService]
+  providers: []
 })
 export class AppModule {}

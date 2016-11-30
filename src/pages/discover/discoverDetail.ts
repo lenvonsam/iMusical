@@ -3,16 +3,16 @@ import { Component,ViewChild} from '@angular/core';
 import { NavController,NavParams,Content} from 'ionic-angular';
 
 @Component({
-  selector: 'page-consult',
-  templateUrl: 'consultDetail.html'
+  selector: 'page-discover-detail',
+  templateUrl: 'discoverDetail.html'
 })
 
-export class ConsultDetailPage {
+export class DiscoverDetailPage {
 	detailObj:any;
 	@ViewChild(Content) content: Content;
 	navOpacity:number=1;
 	navBackground:string='transparent';
-	title:string="";
+  title:string="";
   constructor(public navCtrl: NavController,private params:NavParams) {
   	this.detailObj = this.params.data;
   }
@@ -22,16 +22,16 @@ export class ConsultDetailPage {
      let scrollHeight = event.target.scrollTop;
     if(scrollHeight>5 && scrollHeight<200) {
       this.navOpacity = scrollHeight/200;
-      this.title=this.detailObj.tags+"详情";
       console.log('navOpacity:>>>'+this.navOpacity);
       this.navBackground = 'black';
+      this.title="活动详情";
     } else if(scrollHeight<=5) {
-    	this.title="";
       this.navBackground = 'transparent';
       this.navOpacity=1;
+      this.title="";
     } else {
-    	this.title=this.detailObj.tags+"详情";
       this.navOpacity=1;
+      this.title="活动详情";
     }
     });
   }

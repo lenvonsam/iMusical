@@ -78,4 +78,22 @@ export class MusicalHttpService {
 			return Promise.reject(err);
 		});
 	}
+
+	//获得活动数据
+	getActivityData(currentPage:number):Promise<any> {
+		return this.commonPostMethod("Activity/selectByPageNum.form",{pageNum:currentPage}).then((result)=>{
+			return Promise.resolve(result);
+		}).catch((err)=>{
+			return Promise.reject(err);
+		});
+	}
+
+	//根据id获取活动详情
+	getActivityDetailInfo(id:number):Promise<any> {
+		return this.commonPostMethod("Activity/selectBodyByID.form",{'id':id}).then((result)=>{
+			return Promise.resolve(result[0]);
+		}).catch((err)=>{
+			return Promise.reject(err);
+		});
+	}
 }

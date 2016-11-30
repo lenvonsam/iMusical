@@ -1,8 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
 
-import { NavController,App,Slides,Content,Events } from 'ionic-angular';
-
-import {Http,Jsonp,URLSearchParams,Headers,RequestOptions} from '@angular/http';
+import { NavController,App,Slides,Content,Events,PopoverController } from 'ionic-angular';
 
 import {ConsultDetailPage} from './consultDetail';
 
@@ -14,7 +12,9 @@ import {NewsTopSlide} from '../../models/NewTopSlide';
 
 import 'rxjs/add/operator/toPromise';
 
-import {ArticleType,LoadingHelper} from '../../app/globalMethod';
+import {ArticleType,LoadingHelper,WIDTH} from '../../app/globalMethod';
+
+import {HomePagePop} from './homePopPage';
 
 @Component({
   selector: 'page-home',
@@ -22,7 +22,7 @@ import {ArticleType,LoadingHelper} from '../../app/globalMethod';
   providers:[MusicalHttpService,LoadingHelper]
 })
 export class HomePage {
-  // @ViewChild('mySliders') slider: Slides;
+  @ViewChild(Content) content: Content;
   _options:Object;
   _scrollOptions:Object;
   topSlides:any[] = [];
@@ -36,19 +36,10 @@ export class HomePage {
   currentPage:number = 0;
   showPage:boolean = false;
   artsType:ArticleType = ArticleType.all;
-  constructor(public navCtrl: NavController,private http:Http,private jsonp:Jsonp,private app:App,public events:Events,private musicalHttp:MusicalHttpService,public load:LoadingHelper) {
+  constructor(public navCtrl: NavController,private app:App,public events:Events,private musicalHttp:MusicalHttpService,public load:LoadingHelper,public popCtrl:PopoverController) {
     this.load.show();
     let me = this;
     let topDataPromise = this.musicalHttp.getNewsTopPicsData();
-    // .then((res)=>{
-    //   alert('xxx>'+JSON.stringify(res));
-    //   me.topSlides=res;
-    //   console.log(me.topSlides.length);
-    //   console.log(me.topSlides);
-    //   console.log(me.topSlides[0].featurePic);
-    // },(err)=>{
-    //   alert('error');
-    // });
 
     let listDataPromise = this.musicalHttp.getNewsListData(this.currentPage,this.artsType);
     this._options={
@@ -67,22 +58,82 @@ export class HomePage {
     }).catch((err)=>{
       alert('error');
     });
-    // console.log(window.innerWidth);
-    // this.sliderWidth = window.innerWidth;
-    // this.sliderHeight='scale(1,1)';
-    // console.log('constructor');
-    // this.navBackground = 'transparent';
-    // this.navOpacity=1;
-    // this.navPosition = 'fixed';
-    // this.isclick=false;
     this.app.setScrollDisabled(true);
   }
+
+  tapDoubleToTop(e) {
+    console.log(e.tapCount);
+    if(e.tapCount==2) {
+      this.content.scrollToTop();
+    }
+  }
+
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-    setTimeout(() => {
-      console.log('Async operation has ended');
+    this.currentPage = 0;
+    this.musicalHttp.getNewsListData(this.currentPage,this.artsType).then((res)=>{
+      this.listData = res; 
       refresher.complete();
-    }, 2000);
+    }).catch((err)=>{
+      alert('error');
+    });
+    // setTimeout(() => {
+    //   console.log('Async operation has ended');
+    //   refresher.complete();
+    // }, 2000);
+  }
+
+  showFilter(e) {
+    const me = this;
+    let popover = this.popCtrl.create(HomePagePop,{
+      cb:function(data){
+        if(data!=me.artsType) {
+          me.artsType = me.getFitArticleType(data);
+          me.refreshNewData();
+        } 
+      },
+      artsType:this.artsType
+    },{
+      cssClass:'menu-select'
+    });
+    popover.present({
+      ev: {
+        target:{
+          getBoundingClientRect:function(){
+            return {
+              top:60,
+              left:(WIDTH-40)
+
+            }
+          }
+        }
+      }
+    });
+  }
+
+  refreshNewData() {
+    this.currentPage = 0;
+    this.load.show();
+    this.content.scrollToTop();
+    this.musicalHttp.getNewsListData(this.currentPage,this.artsType).then((res)=>{
+      this.listData = res; 
+      this.load.hide();
+    }).catch((err)=>{
+      alert('error');
+    });
+  }
+
+  getFitArticleType(type:number):ArticleType{
+    if(ArticleType.all==type) {
+      return ArticleType.all
+    }
+    if(ArticleType.critial==type) {
+      return ArticleType.critial
+    }
+
+    if(ArticleType.news==type) {
+      return ArticleType.news
+    }
   }
 
   // tapEvent() {
@@ -112,33 +163,13 @@ export class HomePage {
       console.log(data);
       item.webbody = data[0].body;
       me.load.hide();
-      me.navCtrl.push(LastShowPage,item);
+      me.navCtrl.push(ConsultDetailPage,item);
     }).catch((err)=>{
       alert('error');
     });
   }
 
-  ngOnInit() {
-    // let actionUrl = "https://samhp.leanapp.cn/manage/test";
-    // this.http.get(actionUrl).toPromise().then((response)=>{
-    //   let body = response.json();
-    //   alert(body.abc);
-    // }).catch((err)=>{
-    //   alert('error')
-    // });
-    // let params = new URLSearchParams();
-    // params.set('search',"123");
-    // params.set('action','opensearch');
-    // params.set('format','json');
-    // params.set('callback','JSONP_CALLBACK');
-    // this.jsonp.get(actionUrl,{search:params}).map((response)=>{
-    //   console.log(JSON.stringify(response.json()));
-    // });
-   }
-
-  // ngDoCheck() {
-  //   alert('do check');
-  // }
+  ngOnInit() {}
 
   ngAfterViewInit() {
   //   // this.content = this.app.getComponent('myContent');
@@ -185,6 +216,8 @@ export class HomePage {
 
     this.navCtrl.push(ConsultDetailPage);
   }
+
+  
 
   lastShow(e) {
     this.navCtrl.push(LastShowPage);

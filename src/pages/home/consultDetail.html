@@ -1,13 +1,36 @@
 <ion-header>
-  <ion-navbar color="dark">
-    <ion-title>资讯详情</ion-title>
+  <ion-navbar color="dark" [style.opacity]="navOpacity" [style.background]="navBackground">
+    <ion-title>{{title}}</ion-title>
     <ion-buttons end>
-      <button ion-button color="royal" style="font-size:1.7rem;">
-        <ion-icon name="share-outline" ></ion-icon>
+      <button ion-button style="font-size:1.7rem;color:white;">
+        <ion-icon name="share-outline" style="color:white;"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <h1>hello</h1>
+  <div>
+    <img [src]="detailObj.featurePic"/>
+  </div> 
+  <div [innerHtml]="detailObj.webbody" style="padding:5px 5px;"></div>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar style="padding: 0px 0px">
+    <ion-row style="height:55px;">
+      <ion-col width-33 class="footer-btn">
+        <i class="mr-5 fa fa-heart"></i>
+        赞
+      </ion-col>
+      <ion-col width-33 class="footer-btn">
+        <i class="mr-5 fa fa-comment"></i>
+        2
+      </ion-col>
+      <ion-col width-33 class="footer-btn" style="background: orange;color:white;">
+        <i class="fa fa-pencil"></i>
+        评论
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

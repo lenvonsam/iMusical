@@ -1,0 +1,9 @@
+page-discover-detail {
+  ion-navbar {
+      position: fixed;
+      .toolbar-background {
+        background:  transparent !important;
+        border-color: transparent !important;
+    }
+  }
+}

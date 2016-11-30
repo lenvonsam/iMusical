@@ -27,6 +27,9 @@ function getArtType(artsType:ArticleType):string {
   return result
 }
 
+export const WIDTH=window.screen.width;
+export const HEIGHT=window.screen.height;
+
 export {ArticleType};
 export {getArtType};
 
