@@ -9,8 +9,17 @@ page-home {
   //     border-color: transparent !important;
   //   }
   // }
+  .item .ellipsis_2{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal
+  }
+
   .banner {
-    height: 250px;
+    height: 210px;
     padding:0;
     overflow: hidden;
   }
@@ -29,7 +38,7 @@ page-home {
     margin: 0;
   }
 
-  .swiper-pagination .swiper-pagination-bullet-active {
+  .swiper-pagination .swiper-pagination-bullet-active,.swiper-pagination .swiper-pagination-bullet {
     background:white;
   }
 

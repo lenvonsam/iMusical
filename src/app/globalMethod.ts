@@ -35,12 +35,13 @@ export {getArtType};
 export class LoadingHelper {
   loader:Loading;
   constructor(public loadingCtrl:LoadingController) {
-    this.loader = loadingCtrl.create({
-      content:'loading'
-    });
   }
 
   show(){
+    this.loader = this.loadingCtrl.create({
+      content:'loading'
+    });
+
     this.loader.present();
   }
 

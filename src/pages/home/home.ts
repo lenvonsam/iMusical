@@ -16,7 +16,6 @@ import 'rxjs/add/operator/toPromise';
 
 import {ArticleType,LoadingHelper} from '../../app/globalMethod';
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -51,7 +50,7 @@ export class HomePage {
     //   alert('error');
     // });
 
-    let listDataPromise = musicalHttp.getNewsListData(this.currentPage,this.artsType);
+    let listDataPromise = this.musicalHttp.getNewsListData(this.currentPage,this.artsType);
     this._options={
       pager:true
     };
@@ -108,9 +107,11 @@ export class HomePage {
     let id = item.id;
     console.log(id);
     const me = this;
+    this.load.show();
     this.musicalHttp.getNewsDetailInfo(id).then((data)=>{
       console.log(data);
       item.webbody = data[0].body;
+      me.load.hide();
       me.navCtrl.push(LastShowPage,item);
     }).catch((err)=>{
       alert('error');
@@ -187,6 +188,27 @@ export class HomePage {
 
   lastShow(e) {
     this.navCtrl.push(LastShowPage);
+  }
+
+  doInfinite(infiniteScroll) {
+    this.currentPage++;
+    const me = this;
+    console.log(">>>>>infiniteScroll>>>...");
+    this.musicalHttp.getNewsListData(this.currentPage,this.artsType).then((res)=>{
+      if(res.length>0) {
+        for(var k in res) {
+          var it = res[k];
+          me.listData.push(it);
+        }
+      } else {
+        me.currentPage--;
+      }
+      infiniteScroll.complete();
+    }).catch((err)=>{
+      alert(err);
+    });
+    // setTimeout(function(){
+    // },2000);
   }
 
 }

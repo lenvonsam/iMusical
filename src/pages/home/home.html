@@ -3,35 +3,38 @@
     <ion-title>首页</ion-title>
     <ion-buttons end>
       <button ion-button color="royal">
-        <ion-icon name="search"></ion-icon>
+        <i class="fa-icon-filter"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="no-scroll bg" fullscreen="true">
- <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="200">
+ <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshingSpinner="circles" >
     </ion-refresher-content>
   </ion-refresher>
   <div class="banner" *ngIf="topSlides.length">
        <ion-slides [options]="_options">
-        <ion-slide template="ngFor let item of topSlides; let i = index;">
+        <ion-slide template="ngFor let item of topSlides">
         <img src="{{item.featurePic}}" (tap)="tapNewsDetail(item)" data-id="{{item.id}}">
         </ion-slide>
       </ion-slides>
   </div>
-  <ion-list no-lines *ngIf="showPage" [virtualScroll]="listData">
-    <ion-item *virtualItem="let itm">
-     <ion-avatar item-left>
-        <ion-img [src]="itm.featurePic"></ion-img>
+  <ion-list no-lines *ngIf="showPage">
+    <ion-item template="ngFor let itm of listData">
+     <ion-avatar item-left >
+        <img [src]="itm.featurePic" style="border-radius: 6px;max-width:80px !important;max-height:80px !important;height:60px;" />
       </ion-avatar>
       <p>
         {{itm.tags}}
-        <span item-right>{{itm.posttime}}</span>
+        <span class="pull-right">{{itm.posttime.substring(0,10)}}</span>
       </p>
-      <div>{{itm.title}}</div>
+      <div class="ellipsis_2" style="padding-top:2px;">{{itm.title}}</div>
     </ion-item>
-
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <ion-infinite-scroll-content loadingSpinner="bubbles"></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
 </ion-content>
