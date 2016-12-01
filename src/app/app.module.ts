@@ -10,6 +10,7 @@ import { ConsultDetailPage } from '../pages/home/consultDetail';
 import { LastShowPage } from '../pages/home/lastShow';
 import {HomePagePop} from '../pages/home/homePopPage';
 import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
+import {MeLoginPage} from '../pages/me/login';
 // import { MusicalHttpService } from '../services/http-service';
 //视频插件
 // import {BrowserModule} from '@angular/platform-browser';
@@ -29,7 +30,8 @@ import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
     ConsultDetailPage,
     LastShowPage,
     HomePagePop,
-    DiscoverDetailPage
+    DiscoverDetailPage,
+    MeLoginPage
   ],
   imports: [
     HttpModule,
@@ -57,7 +59,8 @@ import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
     ConsultDetailPage,
     LastShowPage,
     HomePagePop,
-   DiscoverDetailPage
+    DiscoverDetailPage,
+    MeLoginPage
   ],
   providers: []
 })

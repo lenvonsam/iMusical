@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import {MeLoginPage} from './login';
+
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html'
@@ -23,6 +25,10 @@ export class MePage {
                 type: "video/webm"
             }
         ];
+  }
+
+  login() {
+    this.navCtrl.push(MeLoginPage);
   }
 
 }
