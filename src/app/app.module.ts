@@ -11,6 +11,13 @@ import { LastShowPage } from '../pages/home/lastShow';
 import {HomePagePop} from '../pages/home/homePopPage';
 import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
 // import { MusicalHttpService } from '../services/http-service';
+//视频插件
+// import {BrowserModule} from '@angular/platform-browser';
+// import {VgCore} from 'videogular2/core';
+// import {VgControlsModule} from 'videogular2/controls';
+// import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+// import {VgBufferingModule} from 'videogular2/buffering';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +34,11 @@ import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
   imports: [
     HttpModule,
     JsonpModule,
+    // BrowserModule,
+    // VgCore,
+    // VgControlsModule,
+    // VgOverlayPlayModule,
+    // VgBufferingModule,
     IonicModule.forRoot(MyApp,{
       backButtonText:'',
       swipeBackEnabled:false,
@@ -45,7 +57,7 @@ import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
     ConsultDetailPage,
     LastShowPage,
     HomePagePop,
-   DiscoverDetailPage 
+   DiscoverDetailPage
   ],
   providers: []
 })
