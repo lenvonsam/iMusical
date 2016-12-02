@@ -96,4 +96,13 @@ export class MusicalHttpService {
 			return Promise.reject(err);
 		});
 	}
+
+	//获取七牛token
+	getQiniuToken():Promise<any> {
+		return this.commonPostMethod("User/getUploadToken.form",{}).then((result)=>{
+				return Promise.resolve(result);
+		}).catch((err)=>{
+			return Promise.reject(err);
+		});
+	}
 }
