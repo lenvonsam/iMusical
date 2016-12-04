@@ -11,6 +11,9 @@ import { LastShowPage } from '../pages/home/lastShow';
 import {HomePagePop} from '../pages/home/homePopPage';
 import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
 import {MeLoginPage} from '../pages/me/login';
+import {PageForgetPwdStep1} from '../pages/me/forgetPwdStep1';
+import {PageForgetPwdStep2} from '../pages/me/forgetPwdStep2';
+import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
 // import { MusicalHttpService } from '../services/http-service';
 //视频插件
 // import {BrowserModule} from '@angular/platform-browser';
@@ -31,7 +34,10 @@ import {MeLoginPage} from '../pages/me/login';
     LastShowPage,
     HomePagePop,
     DiscoverDetailPage,
-    MeLoginPage
+    MeLoginPage,
+    PageForgetPwdStep1,
+    PageForgetPwdStep2,
+    PageForgetPwdStep3
   ],
   imports: [
     HttpModule,
@@ -60,7 +66,10 @@ import {MeLoginPage} from '../pages/me/login';
     LastShowPage,
     HomePagePop,
     DiscoverDetailPage,
-    MeLoginPage
+    MeLoginPage,
+    PageForgetPwdStep1,
+    PageForgetPwdStep2,
+    PageForgetPwdStep3
   ],
   providers: []
 })
