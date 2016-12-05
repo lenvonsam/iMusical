@@ -11,7 +11,23 @@ import {ArticleType,getArtType} from '../app/globalMethod';
 export class MusicalHttpService {
 	BASICURL:string;
 	constructor(private http:Http) {
-		this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
+		//正式库
+		// this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
+		//测试库
+		this.BASICURL = "http://192.168.31.180:8080/iMusical/";
+	}
+
+	private commonGetMethod(reqUrl:string):Promise<any> {
+		return this.http.get(this.BASICURL+reqUrl).toPromise().then((resp)=>{
+			console.log(resp);
+			if(resp.status==200) {
+				return Promise.resolve(resp.json());
+			} else {
+				return Promise.reject('error');
+			}
+		}).catch((err)=>{
+			return Promise.reject(err);
+		})
 	}
 
 	private commonPostMethod(reqUrl:string,reqParams:Object): Promise<any> {
@@ -23,7 +39,7 @@ export class MusicalHttpService {
 			if(resp.status==200) {
 				return Promise.resolve(resp.json());
 			} else {
-
+				return Promise.reject('error');
 			}
 		}).catch((err)=>{
 			return Promise.reject(err);
@@ -104,5 +120,10 @@ export class MusicalHttpService {
 		}).catch((err)=>{
 			return Promise.reject(err);
 		});
+	}
+
+	//获取验证码
+	getCaptcha(phone:string,type:number):Promise<any> {
+		return this.commonGetMethod("User/getCaptcha.form?phone="+phone+"&type="+type);
 	}
 }

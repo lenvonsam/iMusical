@@ -11,7 +11,7 @@
     <ion-item>
       <ion-label color="dark">验证码</ion-label>
       <ion-input [(ngModel)]="authCode" type="tel"></ion-input>
-      <label item-right ion-button color="dark" outline (click)="getCode()">{{authCodeContent}}</label>
+      <captcha-btn item-right></captcha-btn>
     </ion-item>
     <div style="padding:16px;">
       <button ion-button block color="dark" (click)="nextToStep3()">下一步，设置新密码</button>

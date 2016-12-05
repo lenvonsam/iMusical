@@ -14,6 +14,9 @@ import {MeLoginPage} from '../pages/me/login';
 import {PageForgetPwdStep1} from '../pages/me/forgetPwdStep1';
 import {PageForgetPwdStep2} from '../pages/me/forgetPwdStep2';
 import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
+import {CaptchaComp} from '../directives/captcha';
+import {PageRegisterStep1} from '../pages/me/registerStep1';
+import {PageRegisterStep2} from '../pages/me/registerStep2';
 // import { MusicalHttpService } from '../services/http-service';
 //视频插件
 // import {BrowserModule} from '@angular/platform-browser';
@@ -21,7 +24,6 @@ import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
 // import {VgControlsModule} from 'videogular2/controls';
 // import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 // import {VgBufferingModule} from 'videogular2/buffering';
-
 
 @NgModule({
   declarations: [
@@ -37,7 +39,10 @@ import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
     MeLoginPage,
     PageForgetPwdStep1,
     PageForgetPwdStep2,
-    PageForgetPwdStep3
+    PageForgetPwdStep3,
+    CaptchaComp,
+    PageRegisterStep1,
+    PageRegisterStep2
   ],
   imports: [
     HttpModule,
@@ -69,7 +74,10 @@ import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
     MeLoginPage,
     PageForgetPwdStep1,
     PageForgetPwdStep2,
-    PageForgetPwdStep3
+    PageForgetPwdStep3,
+    CaptchaComp,
+    PageRegisterStep1,
+    PageRegisterStep2
   ],
   providers: []
 })
