@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController,NavParams } from 'ionic-angular';
 
 
+
 @Component({
   selector: 'page-register-step-2',
   templateUrl: 'registerStep2.html'

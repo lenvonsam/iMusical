@@ -66,42 +66,24 @@ export class MusicalHttpService {
 
 	//获取资讯顶部图片
 	getNewsTopPicsData():Promise<NewsTopSlide[]>{
-	 return this.commonPostMethod("Article/selectTopArticle.form",{}).then((result)=>{
-	 	// alert(JSON.stringify(result));
-	 	return Promise.resolve(result as NewsTopSlide[]);
-	 }).catch((err)=>{
-	 	// alert('error');
-	 	return Promise.reject(err);
-	 });
+	 return this.commonPostMethod("Article/selectTopArticle.form",{});
 	}
 
 	// //获取咨询列表信息
 	getNewsListData(currentPage:number,artsType:ArticleType):Promise<any> {
 		let type = getArtType(artsType);
 		console.log(type);
-		return this.commonPostMethod("Article/selectTypeWithoutTopByPageNum.form",{pageNum:currentPage,type:type}).then((result)=>{
-			return Promise.resolve(result);
-		}).catch((err)=>{
-			return Promise.reject(err);
-		})
+		return this.commonPostMethod("Article/selectTypeWithoutTopByPageNum.form",{pageNum:currentPage,type:type});
 	}
 
 	//根据id获取资讯详情
 	getNewsDetailInfo(id:number):Promise<any> {
-		return this.commonPostMethod("Article/selectArtsBodyWithID.form",{'id':id}).then((result)=>{
-			return Promise.resolve(result);
-		}).catch((err)=>{
-			return Promise.reject(err);
-		});
+		return this.commonPostMethod("Article/selectArtsBodyWithID.form",{'id':id});
 	}
 
 	//获得活动数据
 	getActivityData(currentPage:number):Promise<any> {
-		return this.commonPostMethod("Activity/selectByPageNum.form",{pageNum:currentPage}).then((result)=>{
-			return Promise.resolve(result);
-		}).catch((err)=>{
-			return Promise.reject(err);
-		});
+		return this.commonPostMethod("Activity/selectByPageNum.form",{pageNum:currentPage});
 	}
 
 	//根据id获取活动详情
@@ -115,15 +97,21 @@ export class MusicalHttpService {
 
 	//获取七牛token
 	getQiniuToken():Promise<any> {
-		return this.commonPostMethod("User/getUploadToken.form",{}).then((result)=>{
-				return Promise.resolve(result);
-		}).catch((err)=>{
-			return Promise.reject(err);
-		});
+		return this.commonPostMethod("User/getUploadToken.form",{});
 	}
 
 	//获取验证码
 	getCaptcha(phone:string,type:number):Promise<any> {
 		return this.commonGetMethod("User/getCaptcha.form?phone="+phone+"&type="+type);
+	}
+
+	//用户登录
+	login(user:string,token:string,platform:number):Promise<any> {
+		return this.commonPostMethod("User/loginWithCrossPlatform.form",{'platform':platform,'user':user,'token':token});
+	}
+
+	//用户注册
+	register(user:string,token:string,platform:number,captcha:string):Promise<any> {
+		return this.commonPostMethod("User/registerWithCrossPlatform.form",{'platform':platform,'user':user,'token':token,'captcha':captcha});
 	}
 }

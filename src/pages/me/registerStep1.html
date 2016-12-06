@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="dark">
     <ion-title>
-      注册1/2
+      注册
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -17,8 +17,16 @@
       <ion-input [(ngModel)]="token" type="tel"></ion-input>
       <captcha-btn item-right [phone]="phone" [type]="type"></captcha-btn>
     </ion-item>
+    <ion-item>
+      <ion-label color="dark">密码</ion-label>
+      <ion-input placeholder="3-20位字母、数字和符号" [(ngModel)]="pwd" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark">再次确认</ion-label>
+      <ion-input [(ngModel)]="confirmPwd" type="password"></ion-input>
+    </ion-item>
     <div style="padding:16px;">
-      <button ion-button block color="dark" (click)="nextToStep2()">下一步，设置密码</button>
+      <button ion-button block color="dark" (click)="regiser()">注册</button>
     </div>
   </ion-list>
 

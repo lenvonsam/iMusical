@@ -1,4 +1,4 @@
-import {LoadingController,Loading} from 'ionic-angular';
+import {LoadingController,Loading,ToastController} from 'ionic-angular';
 import { Injectable } from '@angular/core';
 
 enum ArticleType {
@@ -50,6 +50,23 @@ export class LoadingHelper {
 
   hide() {
     this.loader.dismiss();
+  }
+}
+
+@Injectable()
+export class ToastHelper {
+  constructor(private toastCtrl:ToastController) {
+
+  }
+
+  show(msg:string,position='middle') {
+    let toast = this.toastCtrl.create({
+      message:msg,
+      duration:3000,
+      position:position,
+      cssClass:'text-center'
+    });
+    toast.present();
   }
 }
 

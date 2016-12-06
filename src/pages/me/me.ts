@@ -9,7 +9,7 @@ import {UploaderBuilder,Uploader} from 'qiniu4js';
 import {MusicalHttpService} from '../../services/http-service';
 
 
-import sha1 from 'sha1';
+
 
 //http://7xko7p.com1.z0.glb.clouddn.com/2.jpg
 
@@ -114,7 +114,6 @@ export class MePage {
   }
 
   register() {
-    console.log(sha1('abc上海'))
     this.uploader.chooseFile();
     // this.uploader.chooseFile();
   }
