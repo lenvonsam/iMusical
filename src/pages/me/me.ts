@@ -8,6 +8,8 @@ import {UploaderBuilder,Uploader} from 'qiniu4js';
 
 import {MusicalHttpService} from '../../services/http-service';
 
+import {User} from '../../models/User';
+
 
 
 
@@ -25,6 +27,9 @@ export class MePage {
   sources:Array<Object>;
   uploader:any;
   constructor(public navCtrl: NavController,private httpService:MusicalHttpService) {
+
+    
+
     this.sources = [
             {
                 src: "http://static.videogular.com/assets/videos/videogular.mp4",
@@ -106,6 +111,14 @@ export class MePage {
 
 
 
+  }
+
+  ngAfterViewInit() {
+    if(User.shareInstance().id) {
+      alert(User.shareInstance().phonenumber);
+    } else {
+      alert('用户未登录');
+    }
   }
 
 

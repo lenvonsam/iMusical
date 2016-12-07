@@ -10,6 +10,10 @@ import {MusicalHttpService} from '../../services/http-service';
 
 import {ToastHelper} from '../../app/globalMethod';
 
+import sha1 from 'sha1';
+
+import {User} from '../../models/User';
+
 @Component({
   selector: 'page-me-login',
   templateUrl: 'login.html',
@@ -39,8 +43,15 @@ export class MeLoginPage {
     if(this.user.trim()=="" || this.token.trim()=="") {
       this.toast.show('字段不能为空');
     } else {
-     this.httpService.login(this.user,this.token,0).then((data)=>{
+     let pwdEncrypt=sha1(this.token);
+     this.httpService.login(this.user,pwdEncrypt,0).then((data)=>{
        alert(JSON.stringify(data));
+       if(data.returnCode==0) {
+         //登录成功
+         User.shareInstance().setConfig(data.user);
+         me.navCtrl.pop();
+
+       }
        if(data.returnCode==0) {
          me.navCtrl.pop();
        } else {
