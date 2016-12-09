@@ -12,6 +12,8 @@ export class PageRegisterStep2 {
   token:string="";
   phone:string="";
   authCodeContent="获取验证码";
+  pwd:string="";
+  confirmPwd:string="";
   isSend:boolean=false;
   constructor(public navCtrl: NavController,private params:NavParams) {
   }
