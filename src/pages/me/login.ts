@@ -48,12 +48,9 @@ export class MeLoginPage {
        alert(JSON.stringify(data));
        if(data.returnCode==0) {
          //登录成功
-         User.shareInstance().setConfig(data.user);
-         me.navCtrl.pop();
-
-       }
-       if(data.returnCode==0) {
-         me.navCtrl.pop();
+        User.shareInstance().setConfig(data.user);
+        alert(User.shareInstance().id);
+        me.navCtrl.pop();
        } else {
          me.toast.show(data.errorMsg);
        }

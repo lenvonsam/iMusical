@@ -9,16 +9,26 @@
 <ion-content style="background: #f7f7f7">
 <ion-list no-lines>
 <div class="head-section">
-  <img src="assets/img/minimen.jpg" class="head">
-  <ion-row>
-    <ion-col width-25></ion-col>
-    <ion-col width-25>
-      <ion-label color="dark" class="text-center" (tap)="login()">登录</ion-label>
+  <i class="fa fa-pencil-square-o head-edit-icon" *ngIf="isLogin" ></i>
+  <ion-row *ngIf="isGoLogin">
+    <ion-col width-33>
+       <img src="http://app.imusical.cn/defaultAvatar.jpg?imageView2/2/w/80/h/80" class="head">
     </ion-col>
-    <ion-col width-25>
-      <ion-label color="dark" class="text-center" (tap)="register()">注册</ion-label>
+    <ion-col width-77 (tap)="login()">
+      <div class="go-login">
+        去登录
+      </div>
     </ion-col>
-    <ion-col width-25></ion-col>
+  </ion-row>
+  <ion-row *ngIf="isLogin">
+    <ion-col width-33>
+       <img [src]="headPic+'?imageVIew2/2/w/80/h/80'" class="head">
+    </ion-col>
+    <ion-col width-77>
+      <div class="go-login">
+        <p>{{nickname}}</p>
+      </div>
+    </ion-col>
   </ion-row>
 </div>
 <ion-item detail-push class="mt-10 bottom-line">
@@ -41,6 +51,11 @@
 <ion-item detail-push class="mt-10">
   <ion-icon name="create-outline" item-left style="color: #a561bd;"></ion-icon>
   意见反馈
+</ion-item>
+
+<ion-item detail-push class="mt-10" (tap)="loginout()">
+  <ion-icon name="create-outline" item-left></ion-icon>
+  注销
 </ion-item>
 <!-- <ion-item> -->
 

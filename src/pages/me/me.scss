@@ -1,14 +1,36 @@
 page-me {
   .head-section {
     width: 100%;
-    background: #fff;
+    background: #333745;
+    position: relative;
+    box-shadow: 0 0 5px 3px rgba(51,55,69,1);
+  }
+
+  .head-section .go-login {
+    width: 100%;
+    height:100%;
+    vertical-align: middle;
+    padding-left:20px;
+    color:white;
+    line-height: 90px;
+    font-size:18px;
+  }
+
+  .head-edit-icon {
+    position: absolute;
+    top:20px;
+    right:20px;
+    color:white;
+    font-size:20px;
   }
 
   .head-section .head {
     border-radius: 50%;
-    width:100px;
-    margin-left: calc((100% - 100px)/2);
-    margin-top: 5%;
+    width:80px;
+    height:80px;
+    // calc((100% - 100px)/2)
+    margin-left: 10%;
+    margin-top: 10%;
     border:1px solid #dbdbdb;
   }
 

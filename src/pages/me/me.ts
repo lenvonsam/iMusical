@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController,ViewController } from 'ionic-angular';
 
 import {MeLoginPage} from './login';
 
@@ -9,6 +9,10 @@ import {UploaderBuilder,Uploader} from 'qiniu4js';
 import {MusicalHttpService} from '../../services/http-service';
 
 import {User} from '../../models/User';
+
+import {Cookie} from 'ng2-cookies/ng2-cookies';
+
+
 
 
 
@@ -26,10 +30,11 @@ import {User} from '../../models/User';
 export class MePage {
   sources:Array<Object>;
   uploader:any;
+  isGoLogin:boolean=true;
+  isLogin:boolean = false;
+  headPic:string="http://app.imusical.cn/defaultAvatar.jpg?imageView2/2/w/80/h/80";
+  nickname:string="";
   constructor(public navCtrl: NavController,private httpService:MusicalHttpService) {
-
-    
-
     this.sources = [
             {
                 src: "http://static.videogular.com/assets/videos/videogular.mp4",
@@ -109,16 +114,14 @@ export class MePage {
       alert(JSON.stringify(err));
     });
 
-
+    // this.viewCtrl.willEnter(function(){
+    //   alert('willEnter');
+    // });
 
   }
 
   ngAfterViewInit() {
-    if(User.shareInstance().id) {
-      alert(User.shareInstance().phonenumber);
-    } else {
-      alert('用户未登录');
-    }
+
   }
 
 
@@ -127,8 +130,37 @@ export class MePage {
   }
 
   register() {
-    this.uploader.chooseFile();
+
+    // this.uploader.chooseFile();
     // this.uploader.chooseFile();
   }
+
+  ionViewWillEnter() {
+    if(User.shareInstance().isLogin()) {
+      alert(User.shareInstance().phonenumber);
+      this.isGoLogin=false;
+      this.isLogin=true;
+      this.headPic=User.shareInstance().avatar;
+      this.nickname=User.shareInstance().nickname;
+      console.log('login success');
+      console.log(document.cookie);
+      alert(document.cookie);
+      console.log(Cookie);
+      var xx = Cookie.get('IMUSICALAPPSESSIONID');
+      alert('xx:>>'+xx);
+      console.log(xx);
+    } else {
+      this.isGoLogin=true;
+      this.isLogin=false;
+    }
+  }
+
+  loginout() {
+    User.shareInstance().loginout();
+    this.isGoLogin=true;
+    this.isLogin=false;
+  }
+
+
 
 }

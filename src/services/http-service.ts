@@ -12,9 +12,10 @@ export class MusicalHttpService {
 	BASICURL:string;
 	constructor(private http:Http) {
 		//正式库
-		// this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
+		this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
 		//测试库
-		this.BASICURL = "http://192.168.31.180:8080/iMusical/";
+		//192.168.31.180
+		// this.BASICURL = "http://api.imusical.dev:8080/iMusical/";
 	}
 
 	private commonGetMethod(reqUrl:string):Promise<any> {
@@ -36,6 +37,7 @@ export class MusicalHttpService {
 	  let body = this.serializeformQuery(reqParams);
 		return this.http.post(this.BASICURL+reqUrl,body,options).toPromise().then((resp)=>{
 			console.log(resp);
+
 			if(resp.status==200) {
 				return Promise.resolve(resp.json());
 			} else {
