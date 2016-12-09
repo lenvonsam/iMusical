@@ -12,10 +12,10 @@ export class MusicalHttpService {
 	BASICURL:string;
 	constructor(private http:Http) {
 		//正式库
-		this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
+		// this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
 		//测试库
 		//192.168.31.180
-		// this.BASICURL = "http://api.imusical.dev:8080/iMusical/";
+		this.BASICURL = "http://localhost:8080/iMusical/";
 	}
 
 	private commonGetMethod(reqUrl:string):Promise<any> {
@@ -32,8 +32,8 @@ export class MusicalHttpService {
 	}
 
 	private commonPostMethod(reqUrl:string,reqParams:Object): Promise<any> {
-		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' })	;
-	  let options = new RequestOptions({ headers: headers });
+		let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'})	;
+	  let options = new RequestOptions({ headers: headers,withCredentials: true });
 	  let body = this.serializeformQuery(reqParams);
 		return this.http.post(this.BASICURL+reqUrl,body,options).toPromise().then((resp)=>{
 			console.log(resp);
@@ -115,5 +115,10 @@ export class MusicalHttpService {
 	//用户注册
 	register(user:string,token:string,platform:number,captcha:string):Promise<any> {
 		return this.commonPostMethod("User/registerWithCrossPlatform.form",{'platform':platform,'user':user,'token':token,'captcha':captcha});
+	}
+
+	//对于操作表进行新增操作
+	insertToOperation(operatorType:string,domain:string,domainId:number,userId:number,content:string):Promise<any> {
+		return this.commonPostMethod("Operation/insertOperation.form",{'type':operatorType,'domain':domain,'domainID':domainId,'userID':userId,'content':content});
 	}
 }

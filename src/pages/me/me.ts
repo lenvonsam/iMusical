@@ -161,6 +161,13 @@ export class MePage {
     this.isLogin=false;
   }
 
+  goToEdit() {
+    this.httpService.insertToOperation("comments","article",77,User.shareInstance().id,'测试').then((resp)=>{
+      console.log(resp);
+    }).catch((err)=>{
+      console.log(err);
+    });
+  }
 
 
 }
