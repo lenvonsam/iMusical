@@ -19,7 +19,7 @@
 <ion-footer>
   <ion-toolbar style="padding: 0px 0px">
     <ion-row style="height:55px;">
-      <ion-col width-33 class="footer-btn" (tap)="zan()" [ngClass]="classFont">
+      <ion-col width-33 class="footer-btn" (click)="zan()" [ngClass]="classFont">
         <i class="mr-5 fa fa-heart"></i>
         赞
       </ion-col>
@@ -27,7 +27,7 @@
         <i class="mr-5 fa fa-comment"></i>
         {{commentsCount}}
       </ion-col>
-      <ion-col width-33 class="footer-btn" style="background: orange;color:white;" (tap)="goToComment()">
+      <ion-col width-33 class="footer-btn" style="background: orange;color:white;" (click)="goToComment()">
         <i class="fa fa-pencil"></i>
         评论
       </ion-col>
