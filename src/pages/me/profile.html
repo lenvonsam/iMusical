@@ -16,7 +16,7 @@
         {{currentUser.phonenumber}}
       </span>
     </ion-item>
-    <ion-item detail-push>
+    <ion-item detail-push (tap)="updateProfile('nickname')">
       昵称
       <span item-right>
         {{currentUser.nickname}}

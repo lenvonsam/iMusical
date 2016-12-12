@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController,NavParams } from 'ionic-angular';
 
-import { PageRegisterStep2 } from './registerStep2';
-
 import {ToastHelper} from '../../app/globalMethod';
 
 import {MusicalHttpService} from '../../services/http-service';
@@ -12,11 +10,11 @@ import sha1 from 'sha1';
 
 
 @Component({
-  selector: 'page-register-step-1',
-  templateUrl: 'registerStep1.html',
+  selector: 'page-register-step',
+  templateUrl: 'registerStep.html',
   providers:[ToastHelper,MusicalHttpService]
 })
-export class PageRegisterStep1 {
+export class PageRegisterStep {
   token:string="";
   phone:string="";
   type:number=1;
@@ -31,7 +29,7 @@ export class PageRegisterStep1 {
 
   }
 
-  
+
   regiser() {
     const me = this;
     if(this.token.trim() == "" || this.phone.trim() == "" || this.pwd.trim() == "" || this.confirmPwd.trim() =="") {
@@ -40,7 +38,7 @@ export class PageRegisterStep1 {
       this.toast.show('两次密码输的不一致');
     } else {
       //注册用户
-      const pwdEncrypt=sha1(this.pwd); 
+      const pwdEncrypt=sha1(this.pwd);
       alert('pwdEncrypt:>>'+sha1);
       this.httpService.register(this.phone,pwdEncrypt,0,this.token).then((result)=>{
         if(result.returnCode==0) {

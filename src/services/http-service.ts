@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http,Jsonp,URLSearchParams,Headers,RequestOptions} from '@angular/http';
+import {Http,Headers,RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { NewsTopSlide} from '../models/NewTopSlide';
@@ -143,7 +143,7 @@ export class MusicalHttpService {
 	}
 
 	//更新用户
-	updateUserProfile(id:number,gender:string="",avatar:string=""):Promise<any> {
+	updateUserProfile(id:number,gender:string="",avatar:string="",nickname:string=""):Promise<any> {
 		var body={id:id};
 		if(gender.trim()!="") {
 			body["gender"] = gender=='男'?0:1;
@@ -153,6 +153,26 @@ export class MusicalHttpService {
 			body["avatar"] = avatar
 		}
 
+		if(nickname.trim() != "") {
+			body["nickname"] = nickname
+			body["displayName"] = nickname
+		}
+
 		return this.commonPostMethod("User/updateUserProfile.form",body);
 	}
+
+	//手机号是否存在
+	isMobileExists(phone:string):Promise<any> {
+		return this.commonPostMethod("User/isMobileExists.form",{mobile:phone});
+	}
+	//校验验证码
+	validateCaptchaInResetPwd(phone:String,captcha:string):Promise<any> {
+		return this.commonPostMethod("User/validateCaptchaInResetPwd.form",{phone:phone,captcha:captcha});
+	}
+
+	//密码重置
+	resetPwd(phone:string,captcha:string,password:string):Promise<any> {
+		return this.commonPostMethod("User/crossplatformResetPwd.form",{phone:phone,captcha:captcha,password:password});
+	}
+
 }

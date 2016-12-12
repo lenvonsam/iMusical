@@ -1,16 +1,12 @@
 import { Component,ViewChild } from '@angular/core';
 
-import { NavController,App,Slides,Content,Events,PopoverController } from 'ionic-angular';
+import { NavController,App,Content,Events,PopoverController } from 'ionic-angular';
 
 import {ConsultDetailPage} from './consultDetail';
 
 import {LastShowPage} from './lastShow';
 
 import {MusicalHttpService} from '../../services/http-service';
-
-import {NewsTopSlide} from '../../models/NewTopSlide';
-
-import 'rxjs/add/operator/toPromise';
 
 import {ArticleType,LoadingHelper,WIDTH} from '../../app/globalMethod';
 
@@ -72,7 +68,7 @@ export class HomePage {
     console.log('Begin async operation', refresher);
     this.currentPage = 0;
     this.musicalHttp.getNewsListData(this.currentPage,this.artsType).then((res)=>{
-      this.listData = res; 
+      this.listData = res;
       refresher.complete();
     }).catch((err)=>{
       alert('error');
@@ -90,7 +86,7 @@ export class HomePage {
         if(data!=me.artsType) {
           me.artsType = me.getFitArticleType(data);
           me.refreshNewData();
-        } 
+        }
       },
       artsType:this.artsType
     },{
@@ -116,7 +112,7 @@ export class HomePage {
     this.load.show();
     this.content.scrollToTop();
     this.musicalHttp.getNewsListData(this.currentPage,this.artsType).then((res)=>{
-      this.listData = res; 
+      this.listData = res;
       this.load.hide();
     }).catch((err)=>{
       alert('error');
@@ -217,7 +213,7 @@ export class HomePage {
     this.navCtrl.push(ConsultDetailPage);
   }
 
-  
+
 
   lastShow(e) {
     this.navCtrl.push(LastShowPage);

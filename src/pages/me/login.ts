@@ -4,7 +4,7 @@ import { NavController } from 'ionic-angular';
 
 import { PageForgetPwdStep1 } from './forgetPwdStep1';
 
-import {PageRegisterStep1} from './registerStep1';
+import {PageRegisterStep} from './registerStep';
 
 import {MusicalHttpService} from '../../services/http-service';
 
@@ -35,7 +35,7 @@ export class MeLoginPage {
   }
 
   goToRegister() {
-    this.navCtrl.push(PageRegisterStep1);
+    this.navCtrl.push(PageRegisterStep);
   }
 
   login() {

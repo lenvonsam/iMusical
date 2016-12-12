@@ -10,6 +10,8 @@ import {User} from '../../models/User';
 
 import {UploaderBuilder} from 'qiniu4js';
 
+import {PageProfileNickname} from './profileNickname';
+
 
 
 @Component({
@@ -106,6 +108,12 @@ export class PageProfile {
   updateProfile(key:string) {
     if(key=='avatar') {
       this.uploader.chooseFile();
+    }
+    if(key=='nickname') {
+      this.navCtrl.push(PageProfileNickname,{
+        userId:this.currentUser.id,
+        nickname:this.currentUser.nickname
+      });
     }
   }
 }

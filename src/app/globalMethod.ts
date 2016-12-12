@@ -1,6 +1,5 @@
-import {LoadingController,Loading,ToastController,AlertController,NavController} from 'ionic-angular';
+import {LoadingController,Loading,ToastController,AlertController} from 'ionic-angular';
 import { Injectable } from '@angular/core';
-// import {MeLoginPage} from '../pages/me/login';
 
 enum ArticleType {
   // 评剧
@@ -60,12 +59,12 @@ export class ToastHelper {
 
   }
 
-  show(msg:string,position='middle') {
+  show(msg:string,position='top') {
     let toast = this.toastCtrl.create({
       message:msg,
       duration:3000,
       position:position,
-      cssClass:'text-center'
+      cssClass:'text-center sam-toast'
     });
     toast.present();
   }
@@ -95,6 +94,19 @@ export class AlertHelper {
       ]
     });
     confirm.present();
+  }
+
+
+  basicConfirm(title:string,message:string,confirmTxt:string,confirmFunc:Function) {
+    let basic = this.alertCtrl.create({
+      title:title,
+      message:message,
+      buttons:[{
+        text:confirmTxt,
+        handler:confirmFunc
+      }]
+    });
+    basic.present();
   }
 }
 

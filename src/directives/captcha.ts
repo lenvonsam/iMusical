@@ -25,7 +25,7 @@ export class CaptchaComp {
       me.isSend=true;
       //发送短信FIXME
       this.musicalHttp.getCaptcha(this.phone,this.type).then((data)=>{
-        alert('returnCode:>>'+data.returnCode);
+        if(data.returnCode==0) {
         //倒计时
         var t = setInterval(function(){
           times--;
@@ -36,6 +36,10 @@ export class CaptchaComp {
             me.isSend=false;
           }
         },1000);
+      } else {
+        me.toast.show(data.errorMsg);
+        me.isSend=false;
+      }
 
       },(err)=>{
         if(err.returnCode) {
@@ -45,11 +49,11 @@ export class CaptchaComp {
         }
       });
 
-      
+
     } else {
       me.toast.show('手机号不能为空');
     }
-  } 
+  }
   }
 
 }

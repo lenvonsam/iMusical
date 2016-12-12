@@ -2,7 +2,7 @@ import { Component} from '@angular/core';
 
 import { NavController,NavParams} from 'ionic-angular';
 
-import {ArticleType,LoadingHelper} from '../../app/globalMethod';
+import {LoadingHelper} from '../../app/globalMethod';
 
 @Component({
   selector: 'page-lastShow',
