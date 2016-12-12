@@ -15,7 +15,7 @@ export class MusicalHttpService {
 		// this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
 		//测试库
 		//192.168.31.180
-		this.BASICURL = "http://192.168.31.180:8080/iMusical/";
+		this.BASICURL = "http://192.168.0.107:8080/iMusical/";
 	}
 
 	private commonGetMethod(reqUrl:string):Promise<any> {
@@ -120,5 +120,39 @@ export class MusicalHttpService {
 	//对于操作表进行新增操作
 	insertToOperation(operatorType:string,domain:string,domainId:number,userId:number,content:string):Promise<any> {
 		return this.commonPostMethod("Operation/insertOperation.form",{'type':operatorType,'domain':domain,'domainID':domainId,'userID':userId,'content':content});
+	}
+
+	//查询是否赞过
+	userIsZanByDomain(domain:string, domainID:number , userID:number): Promise<any>{
+		return this.commonPostMethod("Operation/selectIsZanByUser.form",{type:'likes',domain:domain,domainID:domainID,userID:userID});
+	}
+
+	//查询操作数量
+	selectOperationsCount(type:string,domain:string,domainID:string):Promise<any> {
+		return this.commonPostMethod("Operation/selectOperationsCount.form",{type:type,domain:domain,domainID:domainID});
+	}
+
+	// 查询操作
+	selectOperations(page:number,type:string,domain:string, domainID:number) {
+		return this.commonPostMethod("Operation/selectOperations.form",{page:page,type:type,domain:domain,domainID:domainID});
+	}
+
+	//-操作---通过id删除操作
+	deleteOperationByID(id:number):Promise<any> {
+		return this.commonPostMethod("Operation/deleteOperationByid.form",{id:id});
+	}
+
+	//更新用户
+	updateUserProfile(id:number,gender:string="",avatar:string=""):Promise<any> {
+		var body={id:id};
+		if(gender.trim()!="") {
+			body["gender"] = gender=='男'?0:1;
+		}
+
+		if(avatar.trim()!=""){
+			body["avatar"] = avatar
+		}
+
+		return this.commonPostMethod("User/updateUserProfile.form",body);
 	}
 }

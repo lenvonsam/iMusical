@@ -1,22 +1,9 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
-import { DiscoverPage } from '../pages/discover/discover';
-import { MePage } from '../pages/me/me';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { HttpModule,JsonpModule } from '@angular/http';
-import { ConsultDetailPage } from '../pages/home/consultDetail';
-import { LastShowPage } from '../pages/home/lastShow';
-import {HomePagePop} from '../pages/home/homePopPage';
-import {DiscoverDetailPage} from '../pages/discover/discoverDetail';
-import {MeLoginPage} from '../pages/me/login';
-import {PageForgetPwdStep1} from '../pages/me/forgetPwdStep1';
-import {PageForgetPwdStep2} from '../pages/me/forgetPwdStep2';
-import {PageForgetPwdStep3} from '../pages/me/forgetPwdStep3';
-import {CaptchaComp} from '../directives/captcha';
-import {PageRegisterStep1} from '../pages/me/registerStep1';
-import {PageRegisterStep2} from '../pages/me/registerStep2';
+import pages from './components';
+
 // import { MusicalHttpService } from '../services/http-service';
 //视频插件
 // import {BrowserModule} from '@angular/platform-browser';
@@ -26,27 +13,9 @@ import {PageRegisterStep2} from '../pages/me/registerStep2';
 // import {VgBufferingModule} from 'videogular2/buffering';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    DiscoverPage,
-    MePage,
-    HomePage,
-    TabsPage,
-    ConsultDetailPage,
-    LastShowPage,
-    HomePagePop,
-    DiscoverDetailPage,
-    MeLoginPage,
-    PageForgetPwdStep1,
-    PageForgetPwdStep2,
-    PageForgetPwdStep3,
-    CaptchaComp,
-    PageRegisterStep1,
-    PageRegisterStep2
-  ],
+  declarations: pages,
   imports: [
     HttpModule,
-    JsonpModule,
     // BrowserModule,
     // VgCore,
     // VgControlsModule,
@@ -61,24 +30,7 @@ import {PageRegisterStep2} from '../pages/me/registerStep2';
     })
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    DiscoverPage,
-    MePage,
-    HomePage,
-    TabsPage,
-    ConsultDetailPage,
-    LastShowPage,
-    HomePagePop,
-    DiscoverDetailPage,
-    MeLoginPage,
-    PageForgetPwdStep1,
-    PageForgetPwdStep2,
-    PageForgetPwdStep3,
-    CaptchaComp,
-    PageRegisterStep1,
-    PageRegisterStep2
-  ],
+  entryComponents: pages,
   providers: []
 })
 export class AppModule {}

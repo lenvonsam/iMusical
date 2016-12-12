@@ -1,50 +1,34 @@
 import { Component } from '@angular/core';
 
-import { NavController,ViewController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
-import {MeLoginPage} from './login';
-
-import {UploaderBuilder,Uploader} from 'qiniu4js';
+import {ToastHelper,LoadingHelper} from '../../app/globalMethod';
 
 import {MusicalHttpService} from '../../services/http-service';
 
 import {User} from '../../models/User';
 
-import {PageProfile} from './profile';
+import {UploaderBuilder} from 'qiniu4js';
 
-//http://7xko7p.com1.z0.glb.clouddn.com/2.jpg
+
 
 @Component({
-  selector: 'page-me',
-  templateUrl: 'me.html',
-  providers:[MusicalHttpService]
+  selector: 'page-profile',
+  templateUrl: 'profile.html',
+  providers:[ToastHelper,MusicalHttpService,LoadingHelper]
 })
-export class MePage {
-  sources:Array<Object>;
+export class PageProfile {
+  currentUser:User;
   uploader:any;
-  isGoLogin:boolean=true;
-  isLogin:boolean = false;
-  headPic:string="http://app.imusical.cn/defaultAvatar.jpg?imageView2/2/w/80/h/80";
-  nickname:string="";
-  constructor(public navCtrl: NavController,private httpService:MusicalHttpService) {
-    this.sources = [
-            {
-                src: "http://static.videogular.com/assets/videos/videogular.mp4",
-                type: "video/mp4"
-            },
-            {
-                src: "http://static.videogular.com/assets/videos/videogular.ogg",
-                type: "video/ogg"
-            },
-            {
-                src: "http://static.videogular.com/assets/videos/videogular.webm",
-                type: "video/webm"
-            }
-        ];
-  let me = this;
+  constructor(public navCtrl: NavController,private params:NavParams,private toast:ToastHelper,private httpService:MusicalHttpService,private load:LoadingHelper) {
+    this.currentUser = User.shareInstance();
+
+    const me = this;
+    me.load.show();
     this.httpService.getQiniuToken().then((res)=>{
       console.log("qiniu token");
       console.log(res.data);
+      me.load.hide();
       me.uploader = new UploaderBuilder()
     .debug(true)//开启debug，默认false
     .domain("http://upload.qiniu.com")//默认为http://upload.qiniu.com
@@ -67,6 +51,7 @@ export class MePage {
         onReady(tasks) {
             //该回调函数在图片处理前执行,也就是说task.file中的图片都是没有处理过的
             //选择上传文件确定后,该生命周期函数会被回调。
+            me.load.show();
 
         },onStart(tasks){
             //所有内部图片任务处理后执行
@@ -80,17 +65,23 @@ export class MePage {
             //每一个任务的上传进度,通过`task.progress`获取
             console.log('task progress');
             console.log(task.progress);
-            alert(task.progress);
 
         },onTaskSuccess(task){
             //一个任务上传成功后回调
-            alert('task success cb')
-            console.log('task success cb')
             console.log(task.result.key);//文件的key
             console.log(task.result.hash);//文件hash
+            User.shareInstance().avatar = "http://app.imusical.cn/"+task.result.key;
+            me.httpService.updateUserProfile(me.currentUser.id,"",User.shareInstance().avatar).then((response)=>{
+              console.log(response);
+              me.load.hide();
+            }).catch((err)=>{
+              me.load.hide();
+              me.toast.show('头像上传失败');
+            });
         },onTaskFail(task) {
-            alert('task fail');
-            alert(JSON.stringify(task));
+            console.log(JSON.stringify(task));
+            me.load.hide();
+            me.toast.show('头像上传失败');
             //一个任务在经历重传后依然失败后回调此函数
 
         },onTaskRetry(task) {
@@ -102,53 +93,19 @@ export class MePage {
         }
     }).build();
     }).catch((err)=>{
-      alert('err');
-      alert(JSON.stringify(err));
+      console.log(JSON.stringify(err));
+        me.load.hide();
+        me.toast.show('网络异常');
     });
-
-    // this.viewCtrl.willEnter(function(){
-    //   alert('willEnter');
-    // });
-
   }
 
   ngAfterViewInit() {
 
   }
 
-
-  login() {
-    this.navCtrl.push(MeLoginPage);
-  }
-
-  register() {
-
-    // this.uploader.chooseFile();
-    // this.uploader.chooseFile();
-  }
-
-  ionViewWillEnter() {
-    if(User.shareInstance().isLogin()) {
-      this.isGoLogin=false;
-      this.isLogin=true;
-      this.headPic=User.shareInstance().avatar;
-      this.nickname=User.shareInstance().nickname;
-    } else {
-      this.isGoLogin=true;
-      this.isLogin=false;
+  updateProfile(key:string) {
+    if(key=='avatar') {
+      this.uploader.chooseFile();
     }
   }
-
-  loginout() {
-    User.shareInstance().loginout();
-    this.isGoLogin=true;
-    this.isLogin=false;
-  }
-
-  goToEdit() {
-    //个人中心
-    this.navCtrl.push(PageProfile);
-  }
-
-
 }

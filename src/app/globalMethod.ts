@@ -1,5 +1,6 @@
-import {LoadingController,Loading,ToastController} from 'ionic-angular';
+import {LoadingController,Loading,ToastController,AlertController,NavController} from 'ionic-angular';
 import { Injectable } from '@angular/core';
+// import {MeLoginPage} from '../pages/me/login';
 
 enum ArticleType {
   // 评剧
@@ -69,4 +70,44 @@ export class ToastHelper {
     toast.present();
   }
 }
+
+
+@Injectable()
+export class AlertHelper {
+
+  constructor(private alertCtrl:AlertController) {
+
+  }
+
+  showConfirm(title:string,message:string,confirmTxt:string,confirmFunc:Function,cancelFunc:Function) {
+    let confirm = this.alertCtrl.create({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          text: '取消',
+          handler: cancelFunc
+        },
+        {
+          text: confirmTxt,
+          handler: confirmFunc
+        }
+      ]
+    });
+    confirm.present();
+  }
+}
+
+// function gotoLogin(nav:NavController,alertHelper:AlertHelper,loginCtrl:MeLoginPage) {
+//   alertHelper.showConfirm("友情提示","你还未登录","去登录",function(){
+//       console.log('confirm');
+//       nav.push(loginCtrl);
+//   },function(){
+//       console.log('cancel');
+//   });
+// }
+
+// export {gotoLogin};
+
+
 
