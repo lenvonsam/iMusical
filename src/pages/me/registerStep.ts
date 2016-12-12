@@ -39,10 +39,9 @@ export class PageRegisterStep {
     } else {
       //注册用户
       const pwdEncrypt=sha1(this.pwd);
-      alert('pwdEncrypt:>>'+sha1);
       this.httpService.register(this.phone,pwdEncrypt,0,this.token).then((result)=>{
         if(result.returnCode==0) {
-          alert(JSON.stringify(result));
+          me.navCtrl.pop();
         } else {
           me.toast.show(result.errorMsg);
         }
