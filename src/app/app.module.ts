@@ -61,8 +61,10 @@ import {CaptchaComp} from '../directives/captcha';
     // VgBufferingModule,
     IonicModule.forRoot(MyApp,{
       backButtonText:'',
-      swipeBackEnabled:false,
+      swipeBackEnabled:true,
       tabsHideOnSubPages:true,
+      iconMode:'md',
+      tabsPlacement:"bottom",
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out'
     })
