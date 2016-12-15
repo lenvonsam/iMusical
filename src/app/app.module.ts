@@ -63,8 +63,9 @@ import {CaptchaComp} from '../directives/captcha';
       backButtonText:'',
       swipeBackEnabled:true,
       tabsHideOnSubPages:true,
-      iconMode:'md',
       tabsPlacement:"bottom",
+      ionMode:'ios',
+      mode:'ios',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out'
     })

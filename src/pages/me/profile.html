@@ -10,9 +10,9 @@
     <ion-item detail-push (click)="updateProfile('avatar')">
       <img [src]="currentUser.avatar+'?imageVIew2/2/w/100/h/100'" style="width:100px;height:100px;border-radius: 6px;">
     </ion-item>
-    <ion-item>
+    <ion-item detail-none>
       手机号
-      <span item-right style="margin-right:30px;">
+      <span item-right >
         {{currentUser.phonenumber}}
       </span>
     </ion-item>

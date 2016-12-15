@@ -15,7 +15,7 @@ export class MusicalHttpService {
 		// this.BASICURL = "http://www.imusical.cn:8080/iMusical/";
 		//测试库
 		//192.168.31.180
-		this.BASICURL = "http://192.168.31.180:8080/iMusical/";
+		this.BASICURL = "http://showcase.eurus.cn/iMusical/";
 	}
 
 	private commonGetMethod(reqUrl:string):Promise<any> {

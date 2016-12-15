@@ -9,7 +9,7 @@
 <ion-content style="background: #f7f7f7">
 <ion-list no-lines>
 <div class="head-section">
-  <i class="fa fa-pencil-square-o head-edit-icon" *ngIf="isLogin" (tap)="goToEdit()" ></i>
+  <i class="fa fa-pencil-square-o head-edit-icon" *ngIf="isLogin" tappable (click)="goToEdit()" ></i>
   <ion-row *ngIf="isGoLogin">
     <ion-col width-33>
        <img src="http://app.imusical.cn/defaultAvatar.jpg?imageView2/2/w/80/h/80" class="head">
